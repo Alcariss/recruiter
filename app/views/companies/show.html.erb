@@ -1,0 +1,73 @@
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @company.name %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @company.client %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @company.address %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @company.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @company.longitude %>
+</p>
+<div id="container">
+<% if @company.candidates.empty? %>
+	<p>No candidates</p>
+<% else %>	
+	<p>Candidates in this company:</p>
+	<% @company.candidates.each do |c| %>
+		<ul>
+			<li><%= c.name %> <%= c.surname%> <%= link_to 'Show', c %></li>
+		</ul>
+	<% end %>
+<% end %>
+<br>
+</div>
+
+<div id="container">
+<% if @company.notes.empty? %>
+	<p>No notes</p>
+<% else %>	
+	<p>Notes for this company:</p>
+	<% @company.notes.reverse.each do |n| %>
+		<ul>
+			<li><%= n.content%> <%= link_to 'Show', n %></li>
+		</ul>
+	<% end %>
+<% end %>
+<br>
+</div>
+
+<div id="container">
+<% if @company.contacts.empty? %>
+	<p>No contacts</p>
+<% else %>	
+	<p>Contacts for this company:</p>
+	<% @company.contacts.each do |k| %>
+		<ul>
+			<li><%= k.name%> <%= k.surname%><%= k.role%><%= link_to 'Show', k %></li>
+		</ul>
+	<% end %>
+<% end %>
+<br>
+</div>
+
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>
+

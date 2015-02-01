@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @candidate.name %>
+</p>
+
+<p>
+  <strong>Surname:</strong>
+  <%= @candidate.surname %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @candidate.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @candidate.phone %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @candidate.role %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @candidate.city %>
+</p>
+
+<p>
+  <strong>Technology:</strong>
+  <%= @candidate.technology %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @candidate.company.name %>
+</p>
+
+<div id="container">
+<% if @candidate.comments.empty? %>
+	<p>No comments</p>
+<% else %>	
+	<h2>Comments for this candidate:</h2>
+	<% @candidate.comments.reverse.each do |c| %>
+		
+			<%= c.user.email %> <%= c.created_at %> <br> <%= c.content%><%= link_to 'Show', c %>
+		
+		<hr>
+	<% end %>
+<% end %>
+<br>
+</div>
+
+<%= link_to "Add Comment", "/comments/new?user_id=@user.email&candidate_id=@candidate.id" %>
+<%= link_to 'Edit', edit_candidate_path(@candidate) %> |
+<%= link_to 'Back', candidates_path %>
+

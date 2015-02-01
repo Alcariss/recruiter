@@ -1,0 +1,70 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+#banner {
+  background: #3a686a;
+  padding: 10px;
+  /*border-bottom: 10px solid;*/
+  font: small-caps 40px/40px "Arial", serif;
+  color: black;
+  text-align: center;
+  border-radius: 25px;
+}
+
+#nav {
+  background-color: #6b8e90;
+  /*padding: 10px;*/
+  white-space: nowrap;
+  border-radius: 25px;	
+}
+
+#button {
+	width:200px;
+	margin-left:25px;
+	display:inline-block
+}
+#button:hover {
+  background-color: #FFA500;
+}
+
+#signin{
+width:300px;
+background: #3a686a;
+border-radius: 25px;
+height:50px;
+line-height: 50px;
+text-align:center;
+font-size:40px
+}
+
+#signin:hover {
+  background-color: #FFA500;
+  }
+  
+#signin_field {
+	background-color: #6b8e90;
+	text-align:center;
+	height:100px;
+	width:200px;
+	border-radius: 25px;
+	padding:50px;
+	}
+	
+#container {
+	background-color: #999999;
+	border-radius: 25px;
+	padding:5px;
+	margin:20px;
+	}
