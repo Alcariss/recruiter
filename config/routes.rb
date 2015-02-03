@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  
+    
+  resources :notes
+
   get 'sessions/new'
 
   get 'sessions/create'
@@ -15,15 +19,15 @@ Rails.application.routes.draw do
 
   resources :contacts
 
-  resources :notes
-
-  resources :comments
-
   resources :users
 
-  resources :candidates
+  resources :candidates do
+	resources :comments
+  end
 
-  resources :companies
+  resources :companies do
+	resources :notes
+  end
   
   resources :sessions
   

@@ -25,43 +25,70 @@
   <strong>Longitude:</strong>
   <%= @company.longitude %>
 </p>
+
+<% #comment: list of contacts %>
 <div id="container">
-<% if @company.candidates.empty? %>
-	<p>No candidates</p>
+<% if @company.contacts.empty? %>
+	<h3>No contacts</h3>
 <% else %>	
-	<p>Candidates in this company:</p>
-	<% @company.candidates.each do |c| %>
-		<ul>
-			<li><%= c.name %> <%= c.surname%> <%= link_to 'Show', c %></li>
-		</ul>
+	<h3>Contacts for this company:</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Surname</th>
+				<th>Role</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @company.contacts.each do |k| %>
+			<tr>
+				<td><%= k.name%></td>
+				<td><%= k.surname%></td>
+				<td><%= k.role%></td>
+				<td><%= k.email %></td>
+				<td><%= k.phone %></td>
+				<td><%= link_to 'Show',k %></td>
+			</tr>
+		</tbody>
 	<% end %>
+	</table>
 <% end %>
 <br>
 </div>
+
+<% #comment: notes %>
+<h2>Leave a note</h2>
+	<%= form_for([@company, Note.new]) do |f| %>
+		<%= f.text_area :content, :rows => 4 %>
+			<div class="actions">
+				<%= f.submit "Post a comment"%>
+			</div>
+	<% end %>		
 
 <div id="container">
 <% if @company.notes.empty? %>
-	<p>No notes</p>
+	<h3>No notes</h3>
 <% else %>	
-	<p>Notes for this company:</p>
+	<h3>Notes for this company:</h3>
 	<% @company.notes.reverse.each do |n| %>
-		<ul>
-			<li><%= n.content%> <%= link_to 'Show', n %></li>
-		</ul>
+		<%= n.content%> <br> <%= n.user.email %> <br> <%= n.created_at %>
 	<% end %>
 <% end %>
 <br>
 </div>
 
+<% #comment: list of candidates %>
 <div id="container">
-<% if @company.contacts.empty? %>
-	<p>No contacts</p>
+<% if @company.candidates.empty? %>
+	<h3>No candidates</h3>
 <% else %>	
-	<p>Contacts for this company:</p>
-	<% @company.contacts.each do |k| %>
-		<ul>
-			<li><%= k.name%> <%= k.surname%><%= k.role%><%= link_to 'Show', k %></li>
-		</ul>
+	<h3>Candidates in this company:</h3>
+	<% @company.candidates.each do |c| %>
+		<%= c.name %> <%= c.surname%>
 	<% end %>
 <% end %>
 <br>

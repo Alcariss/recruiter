@@ -40,16 +40,22 @@
   <%= @candidate.company.name %>
 </p>
 
+<h2>Leave a comment</h2>
+	<%= form_for([@candidate, Comment.new]) do |f| %>
+		<%= f.text_area :content, :rows => 4 %>
+			<div class="actions">
+			<%= f.submit "Post"%>
+			</div>
+	<% end %>
+	
 <div id="container">
 <% if @candidate.comments.empty? %>
-	<p>No comments</p>
+	<p>No comments.</p>
 <% else %>	
 	<h2>Comments for this candidate:</h2>
 	<% @candidate.comments.reverse.each do |c| %>
-		
-			<%= c.user.email %> <%= c.created_at %> <br> <%= c.content%><%= link_to 'Show', c %>
-		
-		<hr>
+			<%= c.content%> <br> <%= c.user.email %> <br> <%= c.created_at %>
+			<hr>
 	<% end %>
 <% end %>
 <br>

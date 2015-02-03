@@ -71,4 +71,8 @@ class CandidatesController < ApplicationController
     def candidate_params
       params.require(:candidate).permit(:name, :surname, :email, :phone, :role, :city, :technology, :company_id)
     end
+	
+	def comment_params
+      params.require(:comment).permit(:user_id, :candidate_id, :content)
+    end
 end
