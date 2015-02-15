@@ -1,54 +1,55 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @candidate.name %>
-</p>
-
-<p>
-  <strong>Surname:</strong>
-  <%= @candidate.surname %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @candidate.email %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @candidate.phone %>
-</p>
-
-<p>
-  <strong>Role:</strong>
-  <%= @candidate.role %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @candidate.city %>
-</p>
-
-<p>
-  <strong>Technology:</strong>
-  <%= @candidate.technology %>
-</p>
-
-<p>
-  <strong>Company:</strong>
-  <%= @candidate.company.name %>
-</p>
-
+<!DOCTYPE HTML>
+<html>
+<%- model_class = Candidate -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+<div class="container">
+<div class="row row-centered">
+<div class="fieldset">
+  <dl>
+      <div class="col-xs-4 col-centered col-fixed"><div class="item"><div class="content">
+	  <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= @candidate.full_name %></pre></dd>
+      
+      <dt class="label label-default"><%= model_class.human_attribute_name(:email) %></dt>
+      <dd><pre class="prettyprint"><%= @candidate.email %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:phone) %></dt>
+      <dd><pre class="prettyprint"><%= @candidate.phone %></pre></dd>
+      </div></div></div>
+	  
+	  <div class="col-xs-4 col-centered col-fixed"><div class="item"><div class="content">
+	  <dt class="label label-default"><%= model_class.human_attribute_name(:role) %></dt>
+      <dd><pre class="prettyprint"><%= @candidate.role %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:city) %></dt>
+      <dd><pre class="prettyprint"><%= @candidate.city %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:technology) %></dt>
+      <dd><pre class="prettyprint"><%= @candidate.technology %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:company_id) %></dt>
+      <dd><pre class="prettyprint"><%= @candidate.company.name %></pre></dd>
+      </div></div></div>
+	  
+	  <div class="col-xs-4 col-centered col-fixed"><div class="item"><div class="content">
+	  <dt class="label label-default"><%= model_class.human_attribute_name(:CV) %></dt>
+      <dd><pre class="prettyprint"><%= link_to "Download", @candidate.attachment_url, class: "btn btn-md btn-primary" %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:linkedin) %></dt>
+      <dd><pre class="prettyprint"><%= link_to image_tag('linkedin.jpg'), @candidate.linkedin %><%= link_to "Linkedin", @candidate.linkedin, class: "btn btn-md btn-primary" %></pre></dd>
+	  </div></div></div>
+  </dl>
+</div>
+</div>
+</div>
+<div class="container">
 <h2>Leave a comment</h2>
 	<%= form_for([@candidate, Comment.new]) do |f| %>
-		<%= f.text_area :content, :rows => 4 %>
+		<%= f.text_area :content, :rows => 5, :placeholder => "Insert a comment...", :width => 300 %>
 			<div class="actions">
-			<%= f.submit "Post"%>
+			<%= f.submit "Post", class: "btn btn-md btn-primary"%>
 			</div>
 	<% end %>
+</div>
 	
-<div id="container">
+<hr>
 <% if @candidate.comments.empty? %>
 	<p>No comments.</p>
 <% else %>	
@@ -59,9 +60,16 @@
 	<% end %>
 <% end %>
 <br>
+
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              candidates_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_candidate_path(@candidate), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              candidate_path(@candidate),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
 </div>
-
-<%= link_to "Add Comment", "/comments/new?user_id=@user.email&candidate_id=@candidate.id" %>
-<%= link_to 'Edit', edit_candidate_path(@candidate) %> |
-<%= link_to 'Back', candidates_path %>
-
+</html>

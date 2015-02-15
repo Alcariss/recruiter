@@ -1,5 +1,7 @@
 class CandidatesController < ApplicationController
   before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+  
+  before_filter :authorise
 
   # GET /candidates
   # GET /candidates.json
@@ -69,7 +71,7 @@ class CandidatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
-      params.require(:candidate).permit(:name, :surname, :email, :phone, :role, :city, :technology, :company_id)
+      params.require(:candidate).permit(:name, :surname, :email, :phone, :role, :city, :technology, :company_id, :attachment, :linkedin)
     end
 	
 	def comment_params

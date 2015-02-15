@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
-  # GET /users
+  
+   
+   # GET /users
   # GET /users.json
   def index
     @users = User.all
@@ -25,6 +26,10 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+	
+	if @user.save
+		Appmailer.register(@user).deliver
+	end
 
     respond_to do |format|
       if @user.save

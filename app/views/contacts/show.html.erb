@@ -1,34 +1,33 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Contact -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @contact.name %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= @contact.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:surname) %></dt>
+      <dd><pre class="prettyprint"><%= @contact.surname %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:email) %></dt>
+      <dd><pre class="prettyprint"><%= @contact.email %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:phone) %></dt>
+      <dd><pre class="prettyprint"><%= @contact.phone %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:role) %></dt>
+      <dd><pre class="prettyprint"><%= @contact.role %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:company_id) %></dt>
+      <dd><pre class="prettyprint"><%= @contact.company_id %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Surname:</strong>
-  <%= @contact.surname %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @contact.email %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @contact.phone %>
-</p>
-
-<p>
-  <strong>Role:</strong>
-  <%= @contact.role %>
-</p>
-
-<p>
-  <strong>Company:</strong>
-  <%= @contact.company.name %>
-</p>
-
-<%= link_to 'Edit', edit_contact_path(@contact) %> |
-<%= link_to 'Back', contacts_path %>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              contacts_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_contact_path(@contact), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              contact_path(@contact),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
