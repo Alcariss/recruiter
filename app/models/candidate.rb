@@ -1,6 +1,7 @@
 class Candidate < ActiveRecord::Base
 	belongs_to :company
 	has_many :comments
+	has_many :placementprocesses
 	
 	mount_uploader :attachment, AttachmentUploader
 	
@@ -9,5 +10,9 @@ class Candidate < ActiveRecord::Base
 	def full_name
      name + ' ' + surname
     end
+	
+	def self.search(query)
+		where("surname like ?", "%#{query}%")
+	end
 	
 end

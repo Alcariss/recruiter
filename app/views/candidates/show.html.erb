@@ -38,9 +38,46 @@
   </dl>
 </div>
 </div>
-</div>
+
+
 <div class="container">
-<h2>Leave a comment</h2>
+<h3>Manage placement processes</h3>
+	<%= form_for([@candidate, Placementprocess.new]) do |f| %>
+		<table class="table">
+			<thead>
+				<tr>
+					<th><%= f.label :position, :class => 'control-label col-md-2' %></th>
+					<th><%= f.label :company, :class => 'control-label col-md-2' %></th>
+					<th><%= f.label :presented_on, :class => 'control-label col-md-2' %></th>
+					<th><%= f.label :status, :class => 'control-label col-md-2' %></th>
+					<th><%= f.label :action, :class => 'control-label col-md-2' %></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th><%= f.text_field :position %></th>
+					<th><%= f.collection_select :company_id, Company.all, :id, :name %></th>
+					<th><%= f.text_field :presenteddate, :class => 'datepicker' %></th>
+					<th>Active: <%= f.check_box :active, {checked: true} %></th>
+					<th><div class="actions"><%= f.submit "Start", class: "btn btn-md btn-primary"%></div></th>
+				</tr>
+				<% @candidate.placementprocesses.each do |p| %>
+					<tr>
+						<td><%= p.position %></td>
+						<td><%= p.company.name %></td>
+						<td><%= p.presenteddate %></td>
+						<td><%= p.active %></td>
+						<td><%= link_to t('.edit', :default => t("helpers.links.edit")), edit_placementprocess_path(p), :class => 'btn btn-xs btn-default' %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>		
+			
+	<% end %>
+</div>
+
+<div class="container">
+<h3>Leave a comment</h3>
 	<%= form_for([@candidate, Comment.new]) do |f| %>
 		<%= f.text_area :content, :rows => 5, :placeholder => "Insert a comment...", :width => 300 %>
 			<div class="actions">
@@ -53,13 +90,15 @@
 <% if @candidate.comments.empty? %>
 	<p>No comments.</p>
 <% else %>	
-	<h2>Comments for this candidate:</h2>
+	<h3>Comments:</h3>
 	<% @candidate.comments.reverse.each do |c| %>
-			<%= c.content%> <br> <%= c.user.email %> <br> <%= c.created_at %>
+			<h2><%= c.content%></h2> <br> <%= c.user.email %> <br> <%= time_ago_in_words(c.created_at) %> ago
 			<hr>
 	<% end %>
 <% end %>
 <br>
+
+</div>
 
 <div class="form-group">
   <%= link_to t('.back', :default => t("helpers.links.back")),

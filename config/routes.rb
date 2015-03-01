@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
+
   
+
+  resources :placementprocesses
+
+	get'/search' => 'candidates#search'
+	
+	get'/invite' => 'placementprocesses#invite'
+	
+	get'/offer' => 'placementprocesses#offer'
+	
+	get'/accept' => 'placementprocesses#accept'
+	
+	get'/start' => 'placementprocesses#start'
+	
+	get'/pay' => 'placementprocesses#pay'
+ 
     
   resources :notes
 
@@ -18,14 +34,22 @@ Rails.application.routes.draw do
   get '/signout' => 'sessions#destroy'
   
   get '/home' => 'pages#home'
-
+  
+  
   resources :contacts
 
-  resources :users
+  resources :users  do
+	resources :placementprocesses
+  end
 
   resources :candidates do
 	resources :comments
   end
+  
+  resources :candidates do
+	resources :placementprocesses
+  end
+    
 
   resources :companies do
 	resources :notes

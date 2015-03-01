@@ -2,6 +2,18 @@ class CandidatesController < ApplicationController
   before_action :set_candidate, only: [:show, :edit, :update, :destroy]
   
   before_filter :authorise
+  
+  def search
+	puts "Here"
+	puts params[:q]
+	@candidates = Candidate.search params[:q]
+	unless @candidates.empty?
+		render 'index'
+	else
+		flash[:notice] = 'No such candidates'
+		render 'index'
+	end
+  end
 
   # GET /candidates
   # GET /candidates.json

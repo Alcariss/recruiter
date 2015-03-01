@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 	has_many :notes
 	has_many :comments
+	has_many :placementprocesses
 	has_secure_password
 	
 	validates_confirmation_of :password

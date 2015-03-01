@@ -3,7 +3,8 @@
 <head>
   <title>Recruiter</title>
   <%= stylesheet_link_tag 'application', media: 'all','data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
   <body>
@@ -19,21 +20,23 @@
 	<%= value %>
 	</div>
 <% end %>
-
+	
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
         <%= link_to "the recruiter", '#', id: "logo" %>
         <nav>
+		<%if signed_in? %>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Home", root_path %></li>
-			<li><%= link_to "Users", users_path %></li>
+            <li><%= link_to "Home", user_path(@current_user) %></li>
 			<li><%= link_to "Companies", companies_path %></li>
 			<li><%= link_to "Candidates", candidates_path %></li>
 		    <li><%= link_to "Contacts", contacts_path %></li>
           </ul>
+		<% end %>
         </nav>
       </div>
     </header>
+	
     <div class="container">
       <%= yield %>
     </div>

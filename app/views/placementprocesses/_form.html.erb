@@ -1,0 +1,109 @@
+<%= form_for @placementprocess, :html => { :class => 'form-horizontal' } do |f| %>
+    <div class="form-group">
+    <%= f.label :company_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.collection_select :company_id, Company.all, :id, :name %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :position, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :position, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :active, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.check_box :active, {checked: true}, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :presented_on, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :presenteddate, :class => 'datepicker text_field form-control' %>
+    </div>
+  </div>
+  
+  <% if @placementprocess.presenteddate != nil %>
+	<div class="form-group">
+    <%= f.label :client_interview_on, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :clientinterviewdate, :class => 'datepicker text_field form-control' %>
+    </div>
+	</div>  
+  <% end %>
+  
+  <% if @placementprocess.clientinterviewdate != nil %>
+	<div class="form-group">
+    <%= f.label :offer_placed_on, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :offerplaceddate, :class => 'datepicker text_field form-control' %>
+    </div>
+	</div>
+  <div class="form-group">
+    <%= f.label :offered_salary, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :offeredsalary, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :offered_start, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :offeredstart, :class => 'datepicker text_field form-control' %>
+    </div>
+  </div>
+  <% end %>
+  
+  <% if @placementprocess.offeredstart != nil %>
+  <div class="form-group">
+    <%= f.label :offer_accepted_on, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :offeraccepteddate, :class => 'datepicker text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :accepted_salary, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :acceptedsalary, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :accepted_start, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :acceptedstart, :class => 'datepicker text_field form-control' %>
+    </div>
+  </div>
+  <% end %>
+  
+  <% if @placementprocess.acceptedstart != nil %>
+  <div class="form-group">
+    <%= f.label :started_on, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :starteddate, :class => 'datepicker text_field form-control' %>
+    </div>
+  </div>
+  <% end %>
+  
+  <% if @placementprocess.starteddate != nil %>
+  <div class="form-group">
+    <%= f.label :invoice_paid_on, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :paiddate, :class => 'datepicker text_field form-control' %>
+    </div>
+  </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :process_notes, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :processnotes, :class => 'text_field form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  user_path(@current_user), :class => 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
 <div class = " center jumbotron">
+<% unless signed_in? %>
 <%= form_tag sessions_path do %>
   <%= label_tag :email %>
   <%= text_field_tag :email %>
@@ -10,5 +11,9 @@
 
 <%= link_to "Create Account", new_user_path, class: "btn btn-lg btn-primary" %>
 
+<% end %>
+
+<% else %>
+<h3> Welcome back! </h3>
 <% end %>
 </div>
