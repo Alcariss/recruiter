@@ -25,14 +25,16 @@
       <div class="container">
         <%= link_to "the recruiter", '#', id: "logo" %>
         <nav>
-		<%if signed_in? %>
+		
           <ul class="nav navbar-nav navbar-right">
+		  <%if signed_in? %>
             <li><%= link_to "Home", user_path(@current_user) %></li>
+			<% end %>
 			<li><%= link_to "Companies", companies_path %></li>
 			<li><%= link_to "Candidates", candidates_path %></li>
 		    <li><%= link_to "Contacts", contacts_path %></li>
           </ul>
-		<% end %>
+		
         </nav>
       </div>
     </header>
